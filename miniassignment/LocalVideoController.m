@@ -29,6 +29,7 @@
         self.playerViewController.player = self.player;
     }
     
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:NULL error:NULL];
 }
 
 - (IBAction)playVideo:(UIButton *)sender {
