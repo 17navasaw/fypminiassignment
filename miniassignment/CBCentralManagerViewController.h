@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#include "MadgwickAHRS.h"
 #import "SERVICES.h"
 
 @interface CBCentralManagerViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
@@ -18,6 +19,16 @@
 @property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData *data;
 @property (strong, nonatomic) IBOutlet UITableView *tableview;
+@property (strong, nonatomic) IBOutlet UILabel *connectionStatus;
+@property (strong, nonatomic) IBOutlet UILabel *axText;
+@property (strong, nonatomic) IBOutlet UILabel *ayText;
+@property (strong, nonatomic) IBOutlet UILabel *azText;
+@property (strong, nonatomic) IBOutlet UILabel *gxText;
+@property (strong, nonatomic) IBOutlet UILabel *gyText;
+@property (strong, nonatomic) IBOutlet UILabel *gzText;
+@property (strong, nonatomic) IBOutlet UILabel *mxText;
+@property (strong, nonatomic) IBOutlet UILabel *myText;
+@property (strong, nonatomic) IBOutlet UILabel *mzText;
 
 
 @end
