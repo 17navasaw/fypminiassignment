@@ -12,6 +12,14 @@
 		366C18B523112DDC0084A83F /* CBCentralManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18B123112DDC0084A83F /* CBCentralManagerViewController.m */; };
 		366C18B623112DDC0084A83F /* CBPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18B323112DDC0084A83F /* CBPeripheralViewController.m */; };
 		366C18BE231504310084A83F /* MadgwickAHRS.c in Sources */ = {isa = PBXBuildFile; fileRef = 366C18BD231504310084A83F /* MadgwickAHRS.c */; };
+		366C18CD231681F20084A83F /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C1231681F20084A83F /* CC3Math.m */; };
+		366C18CE231681F20084A83F /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C2231681F20084A83F /* CC3GLMatrix.m */; };
+		366C18CF231681F20084A83F /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C5231681F20084A83F /* CC3Kazmath.c */; };
+		366C18D0231681F20084A83F /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C6231681F20084A83F /* CC3Foundation.m */; };
+		366C18D1231681F20084A83F /* NSValue+CC3Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18CA231681F20084A83F /* NSValue+CC3Types.m */; };
+		366C18D6231A133C0084A83F /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18D2231A133C0084A83F /* OpenGLView.m */; };
+		366C18D7231A133C0084A83F /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 366C18D4231A133C0084A83F /* SimpleFragment.glsl */; };
+		366C18D8231A133C0084A83F /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 366C18D5231A133C0084A83F /* SimpleVertex.glsl */; };
 		8B719518230986E500AF92B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B719517230986E500AF92B1 /* AppDelegate.m */; };
 		8B71951B230986E500AF92B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71951A230986E500AF92B1 /* ViewController.m */; };
 		8B71951E230986E500AF92B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B71951C230986E500AF92B1 /* Main.storyboard */; };
@@ -54,6 +62,23 @@
 		366C18B723112E1B0084A83F /* SERVICES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SERVICES.h; sourceTree = "<group>"; };
 		366C18B92314FF6E0084A83F /* MadgwickAHRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MadgwickAHRS.h; sourceTree = "<group>"; };
 		366C18BD231504310084A83F /* MadgwickAHRS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MadgwickAHRS.c; sourceTree = "<group>"; };
+		366C18C0231681F20084A83F /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
+		366C18C1231681F20084A83F /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Math.m; sourceTree = "<group>"; };
+		366C18C2231681F20084A83F /* CC3GLMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3GLMatrix.m; sourceTree = "<group>"; };
+		366C18C3231681F20084A83F /* CC3Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Logging.h; sourceTree = "<group>"; };
+		366C18C4231681F20084A83F /* NSValue+CC3Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CC3Types.h"; sourceTree = "<group>"; };
+		366C18C5231681F20084A83F /* CC3Kazmath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CC3Kazmath.c; sourceTree = "<group>"; };
+		366C18C6231681F20084A83F /* CC3Foundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Foundation.m; sourceTree = "<group>"; };
+		366C18C7231681F20084A83F /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
+		366C18C8231681F20084A83F /* CC3MathInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3MathInclude.h; sourceTree = "<group>"; };
+		366C18C9231681F20084A83F /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
+		366C18CA231681F20084A83F /* NSValue+CC3Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+CC3Types.m"; sourceTree = "<group>"; };
+		366C18CB231681F20084A83F /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
+		366C18CC231681F20084A83F /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Math.h; sourceTree = "<group>"; };
+		366C18D2231A133C0084A83F /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
+		366C18D3231A133C0084A83F /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
+		366C18D4231A133C0084A83F /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		366C18D5231A133C0084A83F /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
 		3EF3B33559451E0F61B34A04 /* Pods_miniassignmentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_miniassignmentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2BA6CF213FDCD4FF4C225C /* Pods-miniassignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniassignment.debug.xcconfig"; path = "Target Support Files/Pods-miniassignment/Pods-miniassignment.debug.xcconfig"; sourceTree = "<group>"; };
 		57AB216D4B269A13D49FFBFE /* Pods-miniassignmentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniassignmentUITests.debug.xcconfig"; path = "Target Support Files/Pods-miniassignmentUITests/Pods-miniassignmentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +151,26 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		366C18BF231678E50084A83F /* CC3Math */ = {
+			isa = PBXGroup;
+			children = (
+				366C18CB231681F20084A83F /* CC3Foundation.h */,
+				366C18C6231681F20084A83F /* CC3Foundation.m */,
+				366C18C9231681F20084A83F /* CC3GLMatrix.h */,
+				366C18C2231681F20084A83F /* CC3GLMatrix.m */,
+				366C18C5231681F20084A83F /* CC3Kazmath.c */,
+				366C18C0231681F20084A83F /* CC3Kazmath.h */,
+				366C18C3231681F20084A83F /* CC3Logging.h */,
+				366C18CC231681F20084A83F /* CC3Math.h */,
+				366C18C1231681F20084A83F /* CC3Math.m */,
+				366C18C8231681F20084A83F /* CC3MathInclude.h */,
+				366C18C7231681F20084A83F /* ccTypes.h */,
+				366C18C4231681F20084A83F /* NSValue+CC3Types.h */,
+				366C18CA231681F20084A83F /* NSValue+CC3Types.m */,
+			);
+			path = CC3Math;
+			sourceTree = "<group>";
+		};
 		8B71950A230986E400AF92B1 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +197,11 @@
 		8B719515230986E500AF92B1 /* miniassignment */ = {
 			isa = PBXGroup;
 			children = (
+				366C18BF231678E50084A83F /* CC3Math */,
+				366C18D3231A133C0084A83F /* OpenGLView.h */,
+				366C18D2231A133C0084A83F /* OpenGLView.m */,
+				366C18D4231A133C0084A83F /* SimpleFragment.glsl */,
+				366C18D5231A133C0084A83F /* SimpleVertex.glsl */,
 				366C18BD231504310084A83F /* MadgwickAHRS.c */,
 				366C18B92314FF6E0084A83F /* MadgwickAHRS.h */,
 				366C18B423112DDC0084A83F /* CBCentralManagerViewController.h */,
@@ -317,6 +367,8 @@
 				8B8C0BC8230E8AC60035CC8F /* trailer.mp4 in Resources */,
 				8B71954E230D44FA00AF92B1 /* Podfile in Resources */,
 				8B71951E230986E500AF92B1 /* Main.storyboard in Resources */,
+				366C18D7231A133C0084A83F /* SimpleFragment.glsl in Resources */,
+				366C18D8231A133C0084A83F /* SimpleVertex.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,11 +481,17 @@
 			files = (
 				8B71951B230986E500AF92B1 /* ViewController.m in Sources */,
 				8B719526230986EE00AF92B1 /* main.m in Sources */,
+				366C18D0231681F20084A83F /* CC3Foundation.m in Sources */,
+				366C18D1231681F20084A83F /* NSValue+CC3Types.m in Sources */,
 				8B71954A230987F400AF92B1 /* VideoViewController.m in Sources */,
+				366C18D6231A133C0084A83F /* OpenGLView.m in Sources */,
+				366C18CE231681F20084A83F /* CC3GLMatrix.m in Sources */,
+				366C18CD231681F20084A83F /* CC3Math.m in Sources */,
 				366C18B623112DDC0084A83F /* CBPeripheralViewController.m in Sources */,
 				366C18BE231504310084A83F /* MadgwickAHRS.c in Sources */,
 				8B719518230986E500AF92B1 /* AppDelegate.m in Sources */,
 				366C18B523112DDC0084A83F /* CBCentralManagerViewController.m in Sources */,
+				366C18CF231681F20084A83F /* CC3Kazmath.c in Sources */,
 				8B8C0BCB230EBA1A0035CC8F /* LocalVideoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,7 +674,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = awwenhao.miniassignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -635,7 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = awwenhao.miniassignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

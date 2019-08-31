@@ -11,6 +11,9 @@
 
 #include "MadgwickAHRS.h"
 #import "SERVICES.h"
+#import <GLKit/GLKit.h>
+#import "OpenGLView.h"
+#include <math.h>
 
 @interface CBCentralManagerViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
 
@@ -29,6 +32,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *mxText;
 @property (strong, nonatomic) IBOutlet UILabel *myText;
 @property (strong, nonatomic) IBOutlet UILabel *mzText;
+@property (strong, nonatomic) IBOutlet UILabel *timeStampText;
+@property (strong, nonatomic) IBOutlet UILabel *yawText;
+@property (strong, nonatomic) IBOutlet UILabel *pitchText;
+@property (strong, nonatomic) IBOutlet UILabel *rollText;
 
 
 @end

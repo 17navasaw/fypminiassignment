@@ -9,18 +9,25 @@
 #import "CBCentralManagerViewController.h"
 
 @interface CBCentralManagerViewController ()
+@property (strong, nonatomic) OpenGLView *cube;
+@property (weak, nonatomic) IBOutlet UIView *cubeView;
 @end
 
 @implementation CBCentralManagerViewController
-float gx=0.0;
-float gy=0.0;
-float gz=0.0;
-float ax=0.0;
-float ay=0.0;
-float az=0.0;
-float mx=0.0;
-float my=0.0;
-float mz=0.0;
+short gx=0;
+short gy=0;
+short gz=0;
+short ax=0;
+short ay=0;
+short az=0;
+short mx=0;
+short my=0;
+short mz=0;
+
+unsigned int count;
+float magnetoAvg, magnetoSum;
+bool offset_done;
+float Gyro_x_offset, Gyro_y_offset, Gyro_z_offset;
 
 - (IBAction)disconnectFromSensor:(UIButton *)sender {
     if (_discoveredPeripheral != nil)
@@ -37,6 +44,14 @@ float mz=0.0;
         NSLog(@"Scanning started");
         _connectionStatus.text = @"Scanning...";
     }
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    //setup cubeView
+    self.cube = [[OpenGLView alloc]
+                 initWithFrame:self.cubeView.bounds];
+    [self.cubeView addSubview:self.cube];
 }
 
 - (void)viewDidLoad {
@@ -176,26 +191,81 @@ float mz=0.0;
         return;
     }
     
-    NSLog(@"Characteristic updated: %@", characteristic);
+    // NSLog(@"Characteristic updated: %@", characteristic);
     NSString *stringFromData = [self getHexStringFromNSData:characteristic.value];
-    // NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    
     [_textview setText:stringFromData];
     [self extractData:characteristic.value];
 
     [_data appendData:characteristic.value];
-//    [_textview setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
-
-//    // Have we got everything we need?
-//    if ([stringFromData isEqualToString:@"EOM"]) {
-//
-//        [_textview setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
-//
-//        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-//
-//        [_centralManager cancelPeripheralConnection:peripheral];
-//    }
     
-//    [_data appendData:characteristic.value];
+    // After you have extracted the 9 values for accelerometer, gyroscope, and magnetometer
+    
+    offset_done = 0;
+    if((count<60)&&(offset_done==0))
+    {
+        magnetoSum = magnetoSum + mx;
+        count++;
+    }
+    else
+    {
+        magnetoAvg = fabs((float)magnetoSum/60.0);  // get avg of past 60 values of mx
+        count=0;
+        if(((magnetoAvg-abs(mx)<10)&&(magnetoAvg-abs(mx))>-10)&&(offset_done==0)) //make sure that cube is settled (△mx not more than 10)
+        {
+            Gyro_x_offset = gx;    //bear in mind that gyro is still in degrees at this point
+            Gyro_y_offset = gy;
+            Gyro_z_offset = gz;
+            NSLog(@"offset set!\n");
+            count=100;
+            offset_done = 1;
+        }
+        magnetoSum = 0; //reset to 0 again
+    }
+    
+    //Solve the zero error problem with the gyroscope
+    gx = gx - Gyro_x_offset;
+    gy = gy - Gyro_y_offset;
+    gz = gz - Gyro_z_offset;
+    
+    // Show all 9 values of the sensors here
+    
+    //compute quaternion
+    float gyro[3];
+    gyro[0] = GLKMathDegreesToRadians(gx/14.375);
+    gyro[1] = GLKMathDegreesToRadians(gy/14.375);
+    gyro[2] = GLKMathDegreesToRadians(gz/14.375);
+    
+    
+    MadgwickAHRSupdate(-gyro[0], -gyro[1], gyro[2], (float)ax, (float)ay, (float)az, (float)mx, (float)my, (float)mz);
+    
+    // Show all 4 values of quartenions here
+    
+    //display as yaw pitch roll
+    float yaw, pitch, roll;
+    quatToEuler(q1,q2,q0,q3,&yaw,&pitch,&roll);       //Originally q1, q2, q3
+    
+    yaw = GLKMathRadiansToDegrees(yaw);
+    pitch = GLKMathRadiansToDegrees(pitch);
+    roll = GLKMathRadiansToDegrees(roll);
+    
+    self.cube.yaw = yaw;
+    self.cube.pitch = pitch;
+    self.cube.roll = roll;
+    
+    // Display your yaw, pitch and roll values here
+    // NSLog(@"Yaw: %.2f Pitch: %.2f Roll: %.2f\n", yaw, pitch, roll);
+    _yawText.text = [[NSString alloc] initWithFormat:@"%.2f", yaw];
+    _pitchText.text = [[NSString alloc] initWithFormat:@"%.2f", pitch];
+    _rollText.text = [[NSString alloc] initWithFormat:@"%.2f", roll];
+
+}
+
+// For Quaternions to Euler conversion
+void quatToEuler(float q0, float q1, float q2, float q3, float *yaw, float *pitch, float* roll)  {
+    *yaw = atan2(2*(q0*q1 + q2*q3), 1-2*(q1*q1 + q2*q2));
+    *pitch = asin(2*(q0*q2 - q3*q1));
+    *roll = atan2(2*(q0*q3 + q1*q2), 1- 2*(q2*q2 + q3*q3));
 }
 
 - (void)extractData:(NSData *)data
@@ -208,59 +278,69 @@ float mz=0.0;
     unsigned short toAddLeadingOnes = 61440;
     
     // gyroscope values are 16-bit
-    unsigned short gzTest = ((unsigned short)dataBuffer[18] << 8) + (unsigned short)dataBuffer[19];
-    unsigned short gyTest = ((unsigned short)dataBuffer[16] << 8) + (unsigned short)dataBuffer[17];
-    unsigned short gxTest = ((unsigned short)dataBuffer[14] << 8) + (unsigned short)dataBuffer[15];
+    gz = ((unsigned short)dataBuffer[18] << 8) + (unsigned short)dataBuffer[19];
+    gy = ((unsigned short)dataBuffer[16] << 8) + (unsigned short)dataBuffer[17];
+    gx = ((unsigned short)dataBuffer[14] << 8) + (unsigned short)dataBuffer[15];
     
     // magnetometer data 12-bit precision
     unsigned char mzhMSB = (dataBuffer[12] >> 3) & 0x1;
     unsigned char myhMSB = (dataBuffer[10] >> 3) & 0x1;
     unsigned char mxhMSB = (dataBuffer[8] >> 3) & 0x1;
 
-    unsigned short mzTest;
-    unsigned short myTest;
-    unsigned short mxTest;
-
     if (mzhMSB == 1) {
-        mzTest =(((unsigned short)dataBuffer[12] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[13];
+        mz =(((unsigned short)dataBuffer[12] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[13];
     }
     else if (mzhMSB == 0)
-        mzTest = (((unsigned short)dataBuffer[12] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[13];
+        mz = (((unsigned short)dataBuffer[12] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[13];
     if (myhMSB == 1)
-        myTest =(((unsigned short)dataBuffer[10] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[11];
+        my =(((unsigned short)dataBuffer[10] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[11];
     else if (myhMSB == 0)
-        myTest = (((unsigned short)dataBuffer[10] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[11];
+        my = (((unsigned short)dataBuffer[10] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[11];
     if (mxhMSB == 1)
-        mxTest =(((unsigned short)dataBuffer[8] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[9];
+        mx =(((unsigned short)dataBuffer[8] << 8) | toAddLeadingOnes) + (unsigned short)dataBuffer[9];
     else if (mxhMSB == 0)
-        mxTest = (((unsigned short)dataBuffer[8] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[9];
+        mx = (((unsigned short)dataBuffer[8] & toRemoveFirstFourBits) << 8) + (unsigned short)dataBuffer[9];
     
     // accelerometer data 12-bit precision
-    unsigned short azTest = (((unsigned short)dataBuffer[6] & toRemoveLastFourBits) >> 4) + ((unsigned short)dataBuffer[7] << 4);
-    unsigned short ayTest = (((unsigned short)dataBuffer[4] & toRemoveLastFourBits) >> 4) + ((unsigned short)dataBuffer[5] << 4);
-    unsigned short axTest = (((unsigned short)dataBuffer[2] & toRemoveLastFourBits) >> 4) + ((unsigned short)dataBuffer[3] << 4);
+//    unsigned char azMSB = (dataBuffer[7] >> 7) & 0x1;
+//    unsigned char ayMSB = (dataBuffer[5] >> 7) & 0x1;
+//    unsigned char axMSB = (dataBuffer[5] >> 7) & 0x1;
+
+    az = (((unsigned short)dataBuffer[6] & toRemoveLastFourBits)) + ((unsigned short)dataBuffer[7] << 8);
+    ay = (((unsigned short)dataBuffer[4] & toRemoveLastFourBits)) + ((unsigned short)dataBuffer[5] << 8);
+    ax = (((unsigned short)dataBuffer[2] & toRemoveLastFourBits)) + ((unsigned short)dataBuffer[3] << 8);
 
     unsigned int timestamp = (((unsigned int)dataBuffer[12] & toRemoveLastFourBits) << 16)+ (((unsigned int)dataBuffer[10] & toRemoveLastFourBits) << 12) + (((unsigned int)dataBuffer[8] & toRemoveLastFourBits) << 8) + (((unsigned int)dataBuffer[6] & toRemoveFirstFourBits) << 8) + (((unsigned int)dataBuffer[4] & toRemoveFirstFourBits) << 4) + ((unsigned int)dataBuffer[2] & toRemoveFirstFourBits);
 
-    gz = (float)((short)gzTest * 1.0);
-    gy = (float)((short)gyTest * 1.0);
-    gx = (float)((short)gxTest * 1.0);
+    float gzFloat = (float)(gz * 1.0);
+    float gyFloat = (float)(gy * 1.0);
+    float gxFloat = (float)(gx * 1.0);
     
-    mz = (float)((short)mzTest * 1.0);
-    my = (float)((short)myTest * 1.0);
-    mx = (float)((short)mxTest * 1.0);
+    float mzFloat = (float)(mz * 1.0);
+    float myFloat = (float)(my * 1.0);
+    float mxFloat = (float)(mx * 1.0);
     
-    _gzText.text = [[NSString alloc] initWithFormat:@"%.1f", gz];
-    _gyText.text = [[NSString alloc] initWithFormat:@"%.1f", gy];
-    _gxText.text = [[NSString alloc] initWithFormat:@"%.1f", gx];
+    float azFloat = (float)(az * 1.0);
+    float ayFloat = (float)(ay * 1.0);
+    float axFloat = (float)(ax * 1.0);
     
-    _mzText.text = [[NSString alloc] initWithFormat:@"%.1f", mz];
-    _myText.text = [[NSString alloc] initWithFormat:@"%.1f", my];
-    _mxText.text = [[NSString alloc] initWithFormat:@"%.1f", mx];
+    _gzText.text = [[NSString alloc] initWithFormat:@"%.1f", gzFloat];
+    _gyText.text = [[NSString alloc] initWithFormat:@"%.1f", gyFloat];
+    _gxText.text = [[NSString alloc] initWithFormat:@"%.1f", gxFloat];
+    
+    _mzText.text = [[NSString alloc] initWithFormat:@"%.1f", mzFloat];
+    _myText.text = [[NSString alloc] initWithFormat:@"%.1f", myFloat];
+    _mxText.text = [[NSString alloc] initWithFormat:@"%.1f", mxFloat];
 
-//    NSLog(@"%04hx", gzTest);
-//    NSLog(@"%hd", (short)gzTest);
-//    NSLog(@"%.2f", (float)((short)gzTest * 1.0));
+    _azText.text = [[NSString alloc] initWithFormat:@"%.1f", azFloat];
+    _ayText.text = [[NSString alloc] initWithFormat:@"%.1f", ayFloat];
+    _axText.text = [[NSString alloc] initWithFormat:@"%.1f", axFloat];
+    
+    _timeStampText.text = [[NSString alloc] initWithFormat:@"%u", timestamp];
+    
+//    NSLog(@"%04hx", axTest);
+//    NSLog(@"%hd", (short)axTest);
+//    NSLog(@"%.2f", (float)((short)axTest * 1.0));
 
 
 }
