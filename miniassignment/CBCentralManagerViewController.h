@@ -37,5 +37,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *pitchText;
 @property (strong, nonatomic) IBOutlet UILabel *rollText;
 
+@property (nonatomic) GLKQuaternion quaternion;
 
 @end

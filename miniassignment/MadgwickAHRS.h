@@ -1,33 +1,20 @@
-//=====================================================================================================
-// MadgwickAHRS.h
-//=====================================================================================================
 //
-// Implementation of Madgwick's IMU and AHRS algorithms.
-// See: http://www.x-io.co.uk/node/8#open_source_ahrs_and_imu_algorithms
+//  MadgwickAHRS.h
+//  Home Rehab
 //
-// Date			Author          Notes
-// 29/09/2011	SOH Madgwick    Initial release
-// 02/10/2011	SOH Madgwick	Optimised for reduced CPU load
+//  Created by Nicholas on 23/3/15.
+//  Copyright (c) 2015 Phan. All rights reserved.
 //
-//=====================================================================================================
-#ifndef MadgwickAHRS_h
-#define MadgwickAHRS_h
 
-//----------------------------------------------------------------------------------------------------
-// Variable declaration
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
-extern volatile float beta;				// algorithm gain
-extern volatile float q0, q1, q2, q3;	// quaternion of sensor frame relative to auxiliary frame
+@interface MadgwickAHRS : NSObject
 
-//---------------------------------------------------------------------------------------------------
-// Function declarations
+@property (nonatomic) float beta;				// algorithm gain
+@property (nonatomic) float q0, q1, q2, q3;	// quaternion of sensor frame relative to auxiliary frame
 
-void MadgwickAHRSupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz);
-void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az);
+-(GLKQuaternion)MadgwickAHRSupdateWithGyroX:(float)gx andGyroY:(float)gy andGyroZ:(float)gz andAccX:(float)ax andAccY:(float)ay andAccZ:(float)az andMagX:(float)mx andMagY:(float)my andMagZ:(float)mz;
+-(GLKQuaternion)MadgwickAHRSupdateIMUWithGyroX:(float)gx andGyroY:(float)gy andGyroZ:(float)gz andAccX:(float)ax andAccY:(float)ay andAccZ:(float)az;
 
-//- (void) MadgwickAHRSupdate: (float) gx insertGY: (float) gy insertGZ: (float) gz insertAX: (float) ax insertAY: (float) ay insertAZ: (float) az insertMX: (float) mx insertMY: (float) my insertMZ: (float) mz;
-//- (void) MadgwickAHRSupdateIMU: (float) gx insertGY: (float) gy insertGZ: (float) gz insertAX: (float) ax insertAY: (float) ay insertAZ: (float) az;
-#endif
-//=====================================================================================================
-// End of file
-//=====================================================================================================
+@end

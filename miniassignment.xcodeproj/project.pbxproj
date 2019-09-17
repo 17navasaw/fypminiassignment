@@ -11,7 +11,6 @@
 		1A4EC542FF69AB1BD08B0676 /* Pods_miniassignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6E01E37A67E4584EA93FD11 /* Pods_miniassignmentTests.framework */; };
 		366C18B523112DDC0084A83F /* CBCentralManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18B123112DDC0084A83F /* CBCentralManagerViewController.m */; };
 		366C18B623112DDC0084A83F /* CBPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18B323112DDC0084A83F /* CBPeripheralViewController.m */; };
-		366C18BE231504310084A83F /* MadgwickAHRS.c in Sources */ = {isa = PBXBuildFile; fileRef = 366C18BD231504310084A83F /* MadgwickAHRS.c */; };
 		366C18CD231681F20084A83F /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C1231681F20084A83F /* CC3Math.m */; };
 		366C18CE231681F20084A83F /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C2231681F20084A83F /* CC3GLMatrix.m */; };
 		366C18CF231681F20084A83F /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = 366C18C5231681F20084A83F /* CC3Kazmath.c */; };
@@ -20,6 +19,7 @@
 		366C18D6231A133C0084A83F /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18D2231A133C0084A83F /* OpenGLView.m */; };
 		366C18D7231A133C0084A83F /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 366C18D4231A133C0084A83F /* SimpleFragment.glsl */; };
 		366C18D8231A133C0084A83F /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 366C18D5231A133C0084A83F /* SimpleVertex.glsl */; };
+		366C18DB231FBA740084A83F /* MadgwickAHRS.m in Sources */ = {isa = PBXBuildFile; fileRef = 366C18DA231FBA740084A83F /* MadgwickAHRS.m */; };
 		8B719518230986E500AF92B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B719517230986E500AF92B1 /* AppDelegate.m */; };
 		8B71951B230986E500AF92B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B71951A230986E500AF92B1 /* ViewController.m */; };
 		8B71951E230986E500AF92B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B71951C230986E500AF92B1 /* Main.storyboard */; };
@@ -60,8 +60,6 @@
 		366C18B323112DDC0084A83F /* CBPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPeripheralViewController.m; sourceTree = "<group>"; };
 		366C18B423112DDC0084A83F /* CBCentralManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCentralManagerViewController.h; sourceTree = "<group>"; };
 		366C18B723112E1B0084A83F /* SERVICES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SERVICES.h; sourceTree = "<group>"; };
-		366C18B92314FF6E0084A83F /* MadgwickAHRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MadgwickAHRS.h; sourceTree = "<group>"; };
-		366C18BD231504310084A83F /* MadgwickAHRS.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MadgwickAHRS.c; sourceTree = "<group>"; };
 		366C18C0231681F20084A83F /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
 		366C18C1231681F20084A83F /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Math.m; sourceTree = "<group>"; };
 		366C18C2231681F20084A83F /* CC3GLMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3GLMatrix.m; sourceTree = "<group>"; };
@@ -79,6 +77,8 @@
 		366C18D3231A133C0084A83F /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
 		366C18D4231A133C0084A83F /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
 		366C18D5231A133C0084A83F /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
+		366C18D9231FBA740084A83F /* MadgwickAHRS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MadgwickAHRS.h; sourceTree = "<group>"; };
+		366C18DA231FBA740084A83F /* MadgwickAHRS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MadgwickAHRS.m; sourceTree = "<group>"; };
 		3EF3B33559451E0F61B34A04 /* Pods_miniassignmentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_miniassignmentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2BA6CF213FDCD4FF4C225C /* Pods-miniassignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniassignment.debug.xcconfig"; path = "Target Support Files/Pods-miniassignment/Pods-miniassignment.debug.xcconfig"; sourceTree = "<group>"; };
 		57AB216D4B269A13D49FFBFE /* Pods-miniassignmentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-miniassignmentUITests.debug.xcconfig"; path = "Target Support Files/Pods-miniassignmentUITests/Pods-miniassignmentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,12 +198,12 @@
 			isa = PBXGroup;
 			children = (
 				366C18BF231678E50084A83F /* CC3Math */,
+				366C18D9231FBA740084A83F /* MadgwickAHRS.h */,
+				366C18DA231FBA740084A83F /* MadgwickAHRS.m */,
 				366C18D3231A133C0084A83F /* OpenGLView.h */,
 				366C18D2231A133C0084A83F /* OpenGLView.m */,
 				366C18D4231A133C0084A83F /* SimpleFragment.glsl */,
 				366C18D5231A133C0084A83F /* SimpleVertex.glsl */,
-				366C18BD231504310084A83F /* MadgwickAHRS.c */,
-				366C18B92314FF6E0084A83F /* MadgwickAHRS.h */,
 				366C18B423112DDC0084A83F /* CBCentralManagerViewController.h */,
 				366C18B123112DDC0084A83F /* CBCentralManagerViewController.m */,
 				366C18B223112DDC0084A83F /* CBPeripheralViewController.h */,
@@ -483,12 +483,12 @@
 				8B719526230986EE00AF92B1 /* main.m in Sources */,
 				366C18D0231681F20084A83F /* CC3Foundation.m in Sources */,
 				366C18D1231681F20084A83F /* NSValue+CC3Types.m in Sources */,
+				366C18DB231FBA740084A83F /* MadgwickAHRS.m in Sources */,
 				8B71954A230987F400AF92B1 /* VideoViewController.m in Sources */,
 				366C18D6231A133C0084A83F /* OpenGLView.m in Sources */,
 				366C18CE231681F20084A83F /* CC3GLMatrix.m in Sources */,
 				366C18CD231681F20084A83F /* CC3Math.m in Sources */,
 				366C18B623112DDC0084A83F /* CBPeripheralViewController.m in Sources */,
-				366C18BE231504310084A83F /* MadgwickAHRS.c in Sources */,
 				8B719518230986E500AF92B1 /* AppDelegate.m in Sources */,
 				366C18B523112DDC0084A83F /* CBCentralManagerViewController.m in Sources */,
 				366C18CF231681F20084A83F /* CC3Kazmath.c in Sources */,
